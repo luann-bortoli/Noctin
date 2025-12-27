@@ -1,0 +1,78 @@
+.container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    height: 900px;
+    width: 100%;
+
+    .content{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+
+        height: 100%;
+        width: 75%;
+
+    .mainText{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+
+            .title{
+                margin: 0;
+            p{
+                    margin: 0;
+                    font-size: 100px;
+                    color: var(--white);
+                    font-weight: bolder; 
+            }       
+            }
+
+            .desc{
+                display: flex;
+                margin: 0;
+                white-space: pre;
+
+                .descWord{
+                    margin: 0;
+                    p{
+                        margin: 0;
+                        font-size: 50px;
+                        color: var(--white);
+                        font-weight: bold;
+                    }
+                }
+            }
+
+        }
+
+        .buttonContainer{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 200px;
+
+            a{
+                padding: 12px 40px;
+                border-radius: 100px;
+                border: none;
+                background-color: var(--white);
+                outline: none;
+                color: var(--l-black);
+                font-size: 14px;
+                transition: .4s ease-in-out;
+                text-decoration: none;
+
+                &:hover{
+                    cursor: pointer;
+                    -webkit-box-shadow: 0px 5px 50px -1px rgba(255,255,255,0.28); 
+                    box-shadow: 0px 5px 50px -1px rgba(255,255,255,0.28);
+                }
+            }
+        }
+    }
+}
