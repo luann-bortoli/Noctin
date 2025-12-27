@@ -1,0 +1,105 @@
+.container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 300px;
+    padding: 16px 32px;
+    border-radius: 12px;
+    color: var(--white);
+
+        border-top: solid 1px rgba(255, 255, 255, 0.082);
+        border-left: solid 1px rgba(255, 255, 255, 0.082);
+        border-right: solid 1px rgba(255, 255, 255, 0.082);
+        border-bottom: solid 1px rgba(255, 255, 255, 0.082);
+        background-color: rgba(112, 110, 116, 0.137);
+        -webkit-box-shadow: 0px 5px 15px 5px rgba(255,255,255,0.1); 
+        box-shadow: 0px 5px 15px 5px rgba(255,255,255,0.02);
+
+    .titleContainer{
+        display: flex;
+        justify-content: flex-start;
+        align-items: flex-start;
+        width: 100%;
+        height: 32px;
+        padding: 0;
+        margin: 0 0 16px 0;
+
+        .title{
+            font-weight: 500;
+            font-size: 16px;
+            margin: 0;
+            font-weight: bold;
+        }
+    }
+
+    .content{
+        display: flex;
+        justify-content: flex-start;
+        align-items: flex-start;
+        flex-direction: column;
+        height: 150px;
+        width: 100%;
+
+        border-radius: 8px;
+        padding: 16px 0 0 16px;
+
+        border-top: solid 1px rgba(255, 255, 255, 0.082);
+        border-left: solid 1px rgba(255, 255, 255, 0.082);
+        border-right: solid 1px rgba(255, 255, 255, 0.082);
+        border-bottom: solid 1px rgba(255, 255, 255, 0.082);
+        background-color: rgba(116, 116, 116, 0.137);
+        -webkit-box-shadow: 0px 5px 15px 5px rgba(255,255,255,0.1); 
+        box-shadow: 0px 5px 15px 5px rgba(255,255,255,0.02);
+
+        .desc{
+            margin: 0;
+            font-size: 14px;
+            color: var(--d-white)
+        }
+    }
+
+    .actionContainer{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 316px;
+        padding: 16px 0 4px 0;
+
+        button{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 157px;
+            padding: 6px 0;
+            border-radius: 6px 0 0 6px;
+            border: solid 1px var(--white);
+            outline: none;
+            color: var(--black);
+            transition: .2s ease-in-out;
+
+            &:last-child{
+                border-radius: 0 6px 6px 0;
+            }
+
+            &:hover{
+                cursor: pointer;
+                background-color: transparent;
+                border: solid 1px var(--white);
+                color: var(--white);
+
+                svg{
+                    fill: var(--white);
+                }
+            }
+
+            svg{
+                height: 14px;
+                margin: 0 8px 0 0;
+                fill: var(--black);
+                transition: .2s ease-in-out;
+            }
+
+        }
+    }
+}
