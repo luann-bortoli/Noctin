@@ -1,0 +1,23 @@
+@import url('https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,300..900;1,300..900&display=swap');
+
+*{
+    font-family: 'Figtree';
+    scroll-behavior: smooth;
+}
+
+:root{
+    --white: #FFF;
+    --d-white: #F6F6F6;
+    --black: #000;
+    --l-black: #222;
+    --l-l-black: #555;
+    --primary: #a266f1;
+}
+
+body{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    background-color: var(--black);
+}
