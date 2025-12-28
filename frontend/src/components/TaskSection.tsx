@@ -1,5 +1,8 @@
 import styles from '../styles/TaskSection.module.css'
-import Task from './TaskTemp'
+import Task from './Task'
+import CreateTask from './CreateTask'
+
+
 import { useState, useEffect } from 'react'
 import axios from 'axios'
 
@@ -21,11 +24,23 @@ export default function TaskSection(){
     const [order, setOrder] = useState("Priority (Highest first)")
     const [showOrder, setShowOrder] = useState(false)
 
+    const [showCreate, setShowCreate] = useState(false)
+
     const fetchTasks = () =>{
         axios.get<Task[]>("http://localhost:5000/tasks")
         .then(res => setTasks(res.data))
         .catch(err => console.log(err))
     }
+
+    function deleteTask(id: Number){
+        console.log("chegou aki")
+        axios.delete(`http://localhost:5000/tasks/${id}`)
+        .then(res => {console.log(res.data)})
+        .catch(err => console.log(err))
+
+        fetchTasks()
+    }
+
 
     useEffect(()=>{
         fetchTasks( )
@@ -33,6 +48,10 @@ export default function TaskSection(){
 
     return(
         <>
+            {showCreate &&(
+                <CreateTask update={()=> fetchTasks()} cancel={()=>setShowCreate(false)}/>
+            )}
+
             <div id='tasksSection' className={styles.container}>
                 <div className={styles.content}>
 
@@ -63,6 +82,7 @@ export default function TaskSection(){
                         <div className={styles.orderContainer}>
                             <ul>
                                 <li><button onClick={()=> {setOrder("Priority (Highest first)"), setShowOrder(false)}}>Priority (Highest first)</button></li>
+                                <li><button onClick={()=> {setOrder("Priority (Lowest first)"), setShowOrder(false)}}>Priority (Lowst first)</button></li>
                                 <li><button onClick={()=> {setOrder("Priority"), setShowOrder(false)}}>Newest</button></li>  
                                 <li><button onClick={()=> {setOrder("Oldest"), setShowOrder(false)}}>Oldest</button></li>
                             </ul>  
@@ -72,12 +92,12 @@ export default function TaskSection(){
                     </div>
 
                     <div className={styles.taskContainer}>
-                        <div className={styles.createTask}>
+                        <div onClick={()=> setShowCreate(true)} className={styles.createTask}>
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="3 3 18 18"><path fill="#ffffff" d="M11 21v-8H3v-2h8V3h2v8h8v2h-8v8z"/></svg>
                         </div>
-                        {tasks.map((task, index)=> (
+                        {tasks.map((task)=> (
                             <div key={task.id} className={styles.taskItem}>
-                                <Task id={task.id} title={task.title} content={task.content} priority={task.priority} created={task.created} />
+                                <Task deleteTask={()=> deleteTask(task.id)} id={task.id} title={task.title} content={task.content} priority={task.priority} created={task.created} />
                             </div>
                         ))}
                     </div>
