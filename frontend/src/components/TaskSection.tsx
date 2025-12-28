@@ -26,6 +26,7 @@ export default function TaskSection(){
 
     const [showCreate, setShowCreate] = useState(false)
 
+
     const fetchTasks = () =>{
         axios.get<Task[]>("http://localhost:5000/tasks")
         .then(res => setTasks(res.data))
@@ -33,12 +34,11 @@ export default function TaskSection(){
     }
 
     function deleteTask(id: Number){
-        console.log("chegou aki")
         axios.delete(`http://localhost:5000/tasks/${id}`)
-        .then(res => {console.log(res.data)})
+        .then(res =>
+            {console.log(res.data), 
+            fetchTasks()})
         .catch(err => console.log(err))
-
-        fetchTasks()
     }
 
 
@@ -51,6 +51,8 @@ export default function TaskSection(){
             {showCreate &&(
                 <CreateTask update={()=> fetchTasks()} cancel={()=>setShowCreate(false)}/>
             )}
+
+            
 
             <div id='tasksSection' className={styles.container}>
                 <div className={styles.content}>
@@ -97,7 +99,7 @@ export default function TaskSection(){
                         </div>
                         {tasks.map((task)=> (
                             <div key={task.id} className={styles.taskItem}>
-                                <Task deleteTask={()=> deleteTask(task.id)} id={task.id} title={task.title} content={task.content} priority={task.priority} created={task.created} />
+                                <Task updateTask={()=> fetchTasks()} deleteTask={()=> deleteTask(task.id)} id={task.id} title={task.title} content={task.content} priority={task.priority} created={task.created} />
                             </div>
                         ))}
                     </div>
