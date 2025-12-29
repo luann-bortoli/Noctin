@@ -66,6 +66,11 @@ def routePutTask(requestId):
 def routeDeleteTask(requestId):
     session = DBSession()
     task = session.query(Task).get(requestId)
+
+    if not task:
+        session.close()
+        return jsonify({"message": "task nao existe"})
+
     session.delete(task)
     session.commit()
     session.close()

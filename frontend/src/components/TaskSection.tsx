@@ -1,6 +1,7 @@
 import styles from '../styles/TaskSection.module.css'
 import Task from './Task'
 import CreateTask from './CreateTask'
+import EditTask from './EditTask'
 
 
 import { useState, useEffect } from 'react'
@@ -17,6 +18,7 @@ interface Task{
 export default function TaskSection(){
 
     const [tasks, setTasks] = useState<Task[]>([])
+    const [id, setId] = useState(0)
     const [title, setTitle] = useState("")
     const [content, setContent] = useState("")
     const [priority, setPriority] = useState(1)
@@ -25,6 +27,14 @@ export default function TaskSection(){
     const [showOrder, setShowOrder] = useState(false)
 
     const [showCreate, setShowCreate] = useState(false)
+    const [showEdit, setShowEdit] = useState(false)
+
+    function setProps(x:string, y:string, z:number, a:number){
+        setTitle(x)
+        setContent(y)
+        setPriority(z)
+        setId(a)
+    }
 
 
     const fetchTasks = () =>{
@@ -52,12 +62,14 @@ export default function TaskSection(){
                 <CreateTask update={()=> fetchTasks()} cancel={()=>setShowCreate(false)}/>
             )}
 
-            
+            {showEdit &&(
+                <EditTask title={title} id={id} content={content} priority={priority} cancel={()=> setShowEdit(false)} update={()=> fetchTasks()} />
+            )}            
 
             <div id='tasksSection' className={styles.container}>
                 <div className={styles.content}>
 
-                    <div className={styles.actionContainer}>
+                    <div data-aos="zoom-in" className={styles.actionContainer}>
 
                         <div className={styles.searchContainer}>
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="2 2 20 20">
@@ -94,12 +106,12 @@ export default function TaskSection(){
                     </div>
 
                     <div className={styles.taskContainer}>
-                        <div onClick={()=> setShowCreate(true)} className={styles.createTask}>
+                        <div data-aos="zoom-in" onClick={()=> setShowCreate(true)} className={styles.createTask}>
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="3 3 18 18"><path fill="#ffffff" d="M11 21v-8H3v-2h8V3h2v8h8v2h-8v8z"/></svg>
                         </div>
-                        {tasks.map((task)=> (
-                            <div key={task.id} className={styles.taskItem}>
-                                <Task updateTask={()=> fetchTasks()} deleteTask={()=> deleteTask(task.id)} id={task.id} title={task.title} content={task.content} priority={task.priority} created={task.created} />
+                        {tasks.map((task, index)=> (
+                            <div data-aos="zoom-in" data-aos-delay={100 + (100 * index)} key={task.id} className={styles.taskItem}>
+                                <Task setProps={(t, c, p, a) => setProps(t, c, p, a)} showEdit={()=> setShowEdit(true)} updateTask={()=> fetchTasks()} deleteTask={()=> deleteTask(task.id)} id={task.id} title={task.title} content={task.content} priority={task.priority} created={task.created} />
                             </div>
                         ))}
                     </div>
